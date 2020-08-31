@@ -45,6 +45,7 @@
 						      <th scope="col">Id</th>
 						      <th scope="col">Date</th>
 						      <th scope="col">Transaction Type</th>
+						      <th scope="col">Currency Type</th>
 						      <th scope="col">Amount</th>
 						      <th scope="col">Remarks</th>
 						    </tr>
@@ -54,6 +55,7 @@
 						      <th scope="row"><c:out value="${transaction.id}"/></th>
 						      <td><c:out value="${transaction.transactionDate}"/></td>
 						      <td><c:out value="${transaction.transactionType}"/></td>
+						      <td><c:out value="${transaction.currencyType}"/></td>
 						      <td><c:out value="${transaction.amount}"/></td>
 						      <td><c:out value="${transaction.remark}"/></td>
 						    </tr>

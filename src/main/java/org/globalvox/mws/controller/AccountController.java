@@ -1,5 +1,6 @@
 package org.globalvox.mws.controller;
 
+import org.globalvox.mws.enums.CurrencyType;
 import org.globalvox.mws.enums.WithdrawalType;
 import org.globalvox.mws.service.UserService;
 import org.globalvox.mws.service.WithdrawProcessService;
@@ -24,6 +25,8 @@ public class AccountController {
 	public static final String ACCOUNT_AMOUNT = "account/amount";
 	public static final String ACCOUNT_SUMMARY = "account/summary";
 	public static final String ACCOUNT_NOTE = "account/note";
+	public static final String ACCOUNT_CURRENCY = "account/currency";
+	
 	
 	
 	@Autowired
@@ -48,8 +51,16 @@ public class AccountController {
 	
 	@RequestMapping(value="/international",method=RequestMethod.GET)
 	public ModelAndView international() {
-		ModelAndView mv = new ModelAndView(ACCOUNT_AMOUNT);
+		ModelAndView mv = new ModelAndView(ACCOUNT_CURRENCY);
 		mv.addObject("requestVO", withdrawProcessService.getWithdrawalService(WithdrawalType.INTERNATIONAL).getWithdrawalRequest());
+		mv.addObject("currencyDetails", CurrencyType.getInternationalCurrency());
+		return mv;
+	}
+	
+	@RequestMapping(value="/currency",method=RequestMethod.POST)
+	public ModelAndView selectCurrency(@ModelAttribute("requestVO") WithdrawalRequestVO requestVO) {
+		ModelAndView mv = new ModelAndView(ACCOUNT_AMOUNT);
+		mv.addObject("requestVO",requestVO);
 		return mv;
 	}
 	

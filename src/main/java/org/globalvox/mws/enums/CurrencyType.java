@@ -17,6 +17,10 @@ public enum CurrencyType {
 	public String getType() {
 		return type;
 	}
+	
+	public static CurrencyType[]  getInternationalCurrency() {
+		return new CurrencyType[]{CurrencyType.USD, CurrencyType.GBP,CurrencyType.AUD};
+	}
 
 	
 }
