@@ -18,37 +18,38 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value= {"/account"})
 public class AccountController {
 
-	
+
 	public static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
-	
+
 	public static final String ACCOUNT_BALANCE = "account/balance";
 	public static final String ACCOUNT_AMOUNT = "account/amount";
 	public static final String ACCOUNT_SUMMARY = "account/summary";
 	public static final String ACCOUNT_NOTE = "account/note";
 	public static final String ACCOUNT_CURRENCY = "account/currency";
-	
-	
-	
+
+
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
-	private WithdrawProcessService withdrawProcessService; 
-	
+	private WithdrawProcessService withdrawProcessService;
+
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView(ACCOUNT_BALANCE);
 		mv.addObject("userAccount", userService.getUserAccountDetails());
+		System.out.println("callled default url");
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/india",method=RequestMethod.GET)
 	public ModelAndView india() {
 		ModelAndView mv = new ModelAndView(ACCOUNT_AMOUNT);
 		mv.addObject("requestVO",withdrawProcessService.getWithdrawalService(WithdrawalType.INDIAN).getWithdrawalRequest());
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/international",method=RequestMethod.GET)
 	public ModelAndView international() {
 		ModelAndView mv = new ModelAndView(ACCOUNT_CURRENCY);
@@ -56,14 +57,14 @@ public class AccountController {
 		mv.addObject("currencyDetails", CurrencyType.getInternationalCurrency());
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/currency",method=RequestMethod.POST)
 	public ModelAndView selectCurrency(@ModelAttribute("requestVO") WithdrawalRequestVO requestVO) {
 		ModelAndView mv = new ModelAndView(ACCOUNT_AMOUNT);
 		mv.addObject("requestVO",requestVO);
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/note",method=RequestMethod.POST)
 	public ModelAndView amount(@ModelAttribute("requestVO") WithdrawalRequestVO requestVO) {
 		ModelAndView mv = null;
@@ -76,7 +77,7 @@ public class AccountController {
 		mv.addObject("requestVO", requestVO);
 		return mv;
 	}
-	
+
 	@RequestMapping(value="/withdraw",method=RequestMethod.POST)
 	public ModelAndView withdraw(@ModelAttribute("requestVO") WithdrawalRequestVO requestVO) {
 		ModelAndView mv = new ModelAndView(ACCOUNT_SUMMARY);

@@ -10,6 +10,7 @@ public class HomeController {
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String firstPage() {
+		System.out.println("called welcome page.");
 		return "welcome";
 	}
 }
