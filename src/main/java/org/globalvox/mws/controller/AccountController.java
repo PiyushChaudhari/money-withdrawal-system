@@ -39,6 +39,7 @@ public class AccountController {
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView(ACCOUNT_BALANCE);
 		mv.addObject("userAccount", userService.getUserAccountDetails());
+		System.out.println("called index page....");
 		return mv;
 	}
 	
@@ -46,6 +47,7 @@ public class AccountController {
 	public ModelAndView india() {
 		ModelAndView mv = new ModelAndView(ACCOUNT_AMOUNT);
 		mv.addObject("requestVO",withdrawProcessService.getWithdrawalService(WithdrawalType.INDIAN).getWithdrawalRequest());
+		System.out.println("called india page....");
 		return mv;
 	}
 	
